@@ -26,18 +26,22 @@ def main():
     async def start(ctx):
         if bot.startGame == False:
             bot.startGame = True
-            ctx.message.send("Que le jeu commence !")
+            em = nextcord.Embed(title = "Duel Game - Par Th3darkcatYT", description = "Que le jeu commence !")
+            await ctx.send(embed = em)
         else:
-            ctx.message.send("Le jeu est déjà en cours !")
+            em = nextcord.Embed(title = "Duel Game - Par Th3darkcatYT", description = "Le jeu est déjà en cours !")
+            await ctx.send(embed = em)
 
     # Arret du jeu
     @bot.command(name = "stop", description = "Arreter le jeu")
     async def stopgame(ctx):
         if bot.startGame == True:
             bot.starGame = False
-            ctx.message.send("Arret du jeu !")
+            em = nextcord.Embed(title = "Duel Game - Par Th3darkcatYT", description = "Arret du jeu !")
+            await ctx.send(embed = em)
         else:
-            ctx.message.send("Aucun jeu en cours !")
+            em = nextcord.Embed(title = "Duel Game - Par Th3darkcatYT", description = "Aucun jeu en cours !")
+            await ctx.send(embed = em)
 
     #Identification du systeme de connexion
     bot.run(os.getenv("DISCORD_TOKEN"))
