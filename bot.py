@@ -36,7 +36,7 @@ def main():
     @bot.command(name = "stop", description = "Arreter le jeu")
     async def stopgame(ctx):
         if bot.startGame == True:
-            bot.starGame = False
+            bot.startGame = False
             em = nextcord.Embed(title = "Duel Game - Par Th3darkcatYT", description = "Arret du jeu !")
             await ctx.send(embed = em)
         else:
