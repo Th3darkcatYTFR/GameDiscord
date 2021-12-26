@@ -24,7 +24,7 @@ def main():
     # Démarrage du jeu
     @bot.command(name = "start", description = "Démarrer le jeu")
     async def start(ctx):
-        await ctx.channel.purge(1)
+        await ctx.channel.purge(limit = 1)
         if bot.startGame == False:
             bot.startGame = True
             em = nextcord.Embed(title = "Duel Game - Par Th3darkcatYT", description = "Que le jeu commence !")
@@ -36,7 +36,7 @@ def main():
     # Arret du jeu
     @bot.command(name = "stop", description = "Arreter le jeu")
     async def stopgame(ctx):
-        await ctx.channel.purge(1)
+        await ctx.channel.purge(limit = 1)
         if bot.startGame == True:
             bot.startGame = False
             em = nextcord.Embed(title = "Duel Game - Par Th3darkcatYT", description = "Arret du jeu !")
