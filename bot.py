@@ -22,7 +22,7 @@ def main():
         bot.startGame = False
 
     # Démarrage du jeu
-    @bot.command
+    @bot.command(name = "start", description = "Démarrer le jeu")
     async def start(ctx):
         if bot.startGame == False:
             bot.startGame = True
@@ -31,7 +31,7 @@ def main():
             ctx.message.send("Le jeu est déjà en cours !")
 
     # Arret du jeu
-    @bot.command
+    @bot.command(name = "stop", description = "Arreter le jeu")
     async def stopgame(ctx):
         if bot.startGame == True:
             bot.starGame = False
