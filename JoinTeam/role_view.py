@@ -9,8 +9,7 @@ class RoleView(nextcord.ui.View):
         super().__init__(timeout=None)
 
     async def handled_click(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
-        role_id = int(button.custom_id.split(":")[-1])
-        role = interaction.guild.get_role(role_id)
+        role = interaction.guild.get_role(int(button.custom_id.split(":")[-1]))
         assert isinstance(role, nextcord.Role)
 
         if role in interaction.user.roles:
