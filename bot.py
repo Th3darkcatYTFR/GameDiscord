@@ -51,11 +51,11 @@ def main():
         view = JoinTeam()
         await ctx.send("Choix de ton équipe", view = view)
         await view.wait()
-        if view.value is 0 or 3:
+        if view.value == 0 or 3:
             return
-        elif view.value is 1:
+        elif view.value == 1:
             await ctx.send(f"{ctx.author.Display_name} est maintenant dans l'équipe rouge !")
-        elif view.value is 2:
+        elif view.value == 2:
             await ctx.send(f"{ctx.author.Display_name} est maintenant dans l'équpe bleue !")
 
 
