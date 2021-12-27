@@ -6,16 +6,13 @@ from nextcord.colour import Color
 from dotenv.main import load_dotenv
 from nextcord.ext import commands
 from nextcord.ext.commands import has_permissions , MissingPermissions
-from dislash import InteractionClient
+
 def main():
 
 
 
     activity = nextcord.Activity(type=nextcord.ActivityType.watching, name="le futur")
     bot = commands.Bot(command_prefix="/", activity = activity, status=nextcord.Status.idle,help_command = None)
-
-    interac_bot = InteractionClient(bot)
-
 
     load_dotenv()
 
@@ -25,9 +22,44 @@ def main():
         bot.startGame = False
 
 
+    class JoinTeam(nextcord.ui.View):
+        def __init__(self):
+            super().__init__()
+            self.value = 0
+
+        @nextcord.ui.button(label = "Equipe Rouge", style = nextcord.ButtonStyle.red)
+        async def teamRed(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
+            await interaction.response.send_message(f"Un joueur a été mis dans l'équipe rouge !", ephemeral = False)
+            self.value = 1
+            self.stop
+
+        @nextcord.ui.button(label = "Equipe Bleue", style = nextcord.ButtonStyle.primary)
+        async def teamBlue(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
+            await interaction.response.send_message(f"Un joueur a été mis dans l'équipe Bleue !", ephemeral = False)
+            self.value = 2
+            self.stop
+
+        @nextcord.ui.button(label = "Quitter votre équipe", style = nextcord.ButtonStyle.gray)
+        async def leaveTeam(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
+            await interaction.response.send_message(f"Un joueur a quitter une équipe !", ephemeral = False)
+            self.value = 3
+            self.stop
+
+
+    @bot.command(name = "team", description = "Permettre d'afficher des boutons de choix d'équipe")
+    async def team(ctx):
+        view = JoinTeam()
+        await ctx.send("Choix de ton équipe", view = view)
+        await view.wait()
+        if view.value is 0 or 3:
+            return
+        elif view.value is 1:
+            await ctx.send(f"{ctx.author.Display_name} est maintenant dans l'équipe rouge !")
+        elif view.value is 2:
+            await ctx.send(f"{ctx.author.Display_name} est maintenant dans l'équpe bleue !")
+
 
     # Démarrage du jeu
-    @interac_bot.slash_command(name="start",description="Permet le démarrage du jeu")
     @bot.command(name = "start", description = "Démarrer le jeu")
     async def start(ctx):
         await ctx.channel.purge(limit = 1)
