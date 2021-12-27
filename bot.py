@@ -18,6 +18,8 @@ def main():
 
     load_dotenv()
 
+    bot.load_extension("JoinTeam/cog")
+
     @bot.event
     async def on_ready():
         print(f"{bot.user.name} est désormais connecté a discord avec succès !")
