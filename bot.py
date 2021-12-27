@@ -30,19 +30,21 @@ def main():
         @nextcord.ui.button(label = "Equipe Rouge", style = nextcord.ButtonStyle.red)
         async def teamRed(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
             await interaction.response.send_message(f"Un joueur a été mis dans l'équipe rouge !", ephemeral = False)
-            self.value = 1
+            self.value = True
+            bot.team = 0
             self.stop
 
         @nextcord.ui.button(label = "Equipe Bleue", style = nextcord.ButtonStyle.primary)
         async def teamBlue(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
             await interaction.response.send_message(f"Un joueur a été mis dans l'équipe Bleue !", ephemeral = False)
-            self.value = 2
+            self.value = True
+            bot.team = 1
             self.stop
 
         @nextcord.ui.button(label = "Quitter votre équipe", style = nextcord.ButtonStyle.gray)
         async def leaveTeam(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
             await interaction.response.send_message(f"Un joueur a quitter une équipe !", ephemeral = False)
-            self.value = 3
+            self.value = False
             self.stop
 
 
@@ -52,14 +54,16 @@ def main():
         await ctx.send(view.value)
         await ctx.send("Choix de ton équipe", view = view)
         await view.wait()
-        if view.value == 0 or 3:
-            await ctx.send(view.value)
+        if view.value is None:
+            await ctx.send("Vous avez pris trop de temps a repondre !")
             return
-        elif view.value == 1:
-            await ctx.send("test")
-        elif view.value == 2:
-            await ctx.send(f"{ctx.author.Display_name} est maintenant dans l'équpe bleue !")
-
+        elif view.value is False:
+            await ctx.send("Vous avez quitter votre équipe !")
+        elif view.value is True:
+            if bot.team == 1:
+                await ctx.send(f"{ctx.author.Display_name} est maintenant dans l'équpe bleue !")
+            else:
+                await ctx.send(f"{ctx.author.Display_name} est maintenant dans l'équpe rouge !")
 
     # Démarrage du jeu
     @bot.command(name = "start", description = "Démarrer le jeu")
