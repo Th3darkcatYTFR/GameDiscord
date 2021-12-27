@@ -5,6 +5,7 @@ from nextcord import Member
 from nextcord.colour import Color
 from dotenv.main import load_dotenv
 from nextcord.ext import commands
+from nextcord.utils import get
 from nextcord.ext.commands import has_permissions , MissingPermissions
 
 def main():
@@ -24,9 +25,9 @@ def main():
     @bot.command(name = "team", description = "Permettre d'afficher des boutons de choix d'équipe")
     async def team(ctx, team = None):
         if team == "bleu":
-            role = nextcord.utils.get(ctx.guild.roles, name = "Equipe Bleue")
             member = ctx.message.author
-            await bot.add_roles(member, role)
+            role = get(member.server.roles, name = "Equipe Bleue")
+            await member.add_roles(role)
             await ctx.send(f"{ctx.author.display_name} est maintenant dans l'équipe {team}e !")
         elif team == "rouge":
             await ctx.send(f"{ctx.author.display_name} est maintenant dans l'équipe {team} !")        
