@@ -23,9 +23,12 @@ def main():
 
     @bot.command(name = "team", description = "Permettre d'afficher des boutons de choix d'équipe")
     async def team(ctx, team = None):
+        member = ctx.author.message
         if team == "bleu":
+            await member.add_roles("Equipe Bleue")
             await ctx.send(f"{ctx.author.display_name} est maintenant dans l'équipe {team}e !")
         elif team == "rouge":
+            await member.add_roles("Equipe Rouge")
             await ctx.send(f"{ctx.author.display_name} est maintenant dans l'équipe {team} !")        
         elif team != None or "rouge" or "bleu" :
             await ctx.send(f"Vous n'avez pas utilisée correctement la commande !")
