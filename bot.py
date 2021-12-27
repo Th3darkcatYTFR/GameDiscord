@@ -26,7 +26,7 @@ def main():
     async def team(ctx, team = None):
         if team == "bleu":
             member = ctx.message.author
-            role = get(member.server.roles, name = "Equipe Bleue")
+            role = get(ctx.guild.roles, name = "Equipe Bleue")
             await member.add_roles(role)
             await ctx.send(f"{ctx.author.display_name} est maintenant dans l'équipe {team}e !")
         elif team == "rouge":
