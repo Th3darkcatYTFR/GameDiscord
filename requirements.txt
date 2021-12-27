@@ -1,3 +1,4 @@
 nextcord
+dislash
 dotenv-python
 python-dotenv

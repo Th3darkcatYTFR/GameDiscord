@@ -6,13 +6,16 @@ from nextcord.colour import Color
 from dotenv.main import load_dotenv
 from nextcord.ext import commands
 from nextcord.ext.commands import has_permissions , MissingPermissions
-
+from dislash import InteractionClient
 def main():
 
 
 
     activity = nextcord.Activity(type=nextcord.ActivityType.watching, name="le futur")
     bot = commands.Bot(command_prefix="/", activity = activity, status=nextcord.Status.idle,help_command = None)
+
+    interac_bot = InteractionClient(bot)
+
 
     load_dotenv()
 
@@ -21,7 +24,10 @@ def main():
         print(f"{bot.user.name} est désormais connecté a discord avec succès !")
         bot.startGame = False
 
+
+
     # Démarrage du jeu
+    @interac_bot.slash_command(name="start",description="Permet le démarrage du jeu")
     @bot.command(name = "start", description = "Démarrer le jeu")
     async def start(ctx):
         await ctx.channel.purge(limit = 1)
