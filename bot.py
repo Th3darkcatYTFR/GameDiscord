@@ -52,9 +52,9 @@ def main():
             ctx.send("La partie est déjà en cours !")
         else:
             view = JoinTeam()
+            await ctx.send(view.value)
             await ctx.send("Choix de ton équipe", view = view)
             await view.wait()
-            await ctx.send(view.value)
             if view.value == 0 or 3:
                 await ctx.send(view.value)
                 return
