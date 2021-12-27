@@ -18,7 +18,7 @@ def main():
 
     load_dotenv()
 
-    bot.load_extension("JoinTeam/cog")
+    bot.load_extension("cog")
 
     @bot.event
     async def on_ready():
