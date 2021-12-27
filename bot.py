@@ -49,21 +49,13 @@ def main():
 
 
     @bot.command(name = "team", description = "Permettre d'afficher des boutons de choix d'équipe")
-    async def team(ctx):
-        view = JoinTeam()
-        await ctx.send(view.value)
-        await ctx.send("Choix de ton équipe", view = view)
-        await view.wait()
-        if view.value is None:
-            await ctx.send("Vous avez pris trop de temps a repondre !")
-            return
-        elif view.value is False:
-            await ctx.send("Vous avez quitter votre équipe !")
-        elif view.value is True:
-            if bot.team == 1:
-                await ctx.send(f"{ctx.author.Display_name} est maintenant dans l'équpe bleue !")
-            else:
-                await ctx.send(f"{ctx.author.Display_name} est maintenant dans l'équpe rouge !")
+    async def team(ctx, team = None):
+        if team == "bleu":
+            await ctx.send(f"{ctx.author.Display_name} est maintenant dans l'équpe bleue !")
+        elif team == "rouge":
+            await ctx.send(f"{ctx.author.Display_name} est maintenant dans l'équpe rouge !")
+        elif team == None:
+            await ctx.send(f"Vous n'avez pas utilisée correctement la commande !")
 
     # Démarrage du jeu
     @bot.command(name = "start", description = "Démarrer le jeu")
