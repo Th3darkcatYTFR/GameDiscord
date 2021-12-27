@@ -11,7 +11,7 @@ class ButtonRoles(commands.Cog, name = "Roles Main"):
         self.__bot.add_view(RoleView())
 
     @commands.command()
-    @commands.has_permissions(manage_message = True)
+    @commands.is_owner()
     async def roles(self, ctx: commands.Context):
         await ctx.send("Choisir votre équipe en cliquant sur le bouton de votre choix !", view = RoleView())
 
