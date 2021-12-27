@@ -21,40 +21,13 @@ def main():
         print(f"{bot.user.name} est désormais connecté a discord avec succès !")
         bot.startGame = False
 
-
-    class JoinTeam(nextcord.ui.View):
-        def __init__(self):
-            super().__init__()
-            self.value = 0
-
-        @nextcord.ui.button(label = "Equipe Rouge", style = nextcord.ButtonStyle.red)
-        async def teamRed(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
-            await interaction.response.send_message(f"Un joueur a été mis dans l'équipe rouge !", ephemeral = False)
-            self.value = True
-            bot.team = 0
-            self.stop
-
-        @nextcord.ui.button(label = "Equipe Bleue", style = nextcord.ButtonStyle.primary)
-        async def teamBlue(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
-            await interaction.response.send_message(f"Un joueur a été mis dans l'équipe Bleue !", ephemeral = False)
-            self.value = True
-            bot.team = 1
-            self.stop
-
-        @nextcord.ui.button(label = "Quitter votre équipe", style = nextcord.ButtonStyle.gray)
-        async def leaveTeam(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
-            await interaction.response.send_message(f"Un joueur a quitter une équipe !", ephemeral = False)
-            self.value = False
-            self.stop
-
-
     @bot.command(name = "team", description = "Permettre d'afficher des boutons de choix d'équipe")
     async def team(ctx, team = None):
         if team == "bleu":
             await ctx.send(f"{ctx.author.display_name} est maintenant dans l'équipe {team}e !")
         elif team == "rouge":
             await ctx.send(f"{ctx.author.display_name} est maintenant dans l'équipe {team} !")        
-        elif team == None:
+        elif team != None or "rouge" or "bleu" :
             await ctx.send(f"Vous n'avez pas utilisée correctement la commande !")
 
     # Démarrage du jeu
