@@ -25,7 +25,7 @@ def main():
     async def team(ctx, team = None):
         if team == "bleu":
             role = nextcord.utils.get(ctx.guild.roles, name = "Equipe Bleue")
-            user = ctx.author.message
+            user = ctx.message.author
             await user.add_roles(role)
             await ctx.send(f"{ctx.author.display_name} est maintenant dans l'équipe {team}e !")
         elif team == "rouge":
