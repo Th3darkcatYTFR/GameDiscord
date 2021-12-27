@@ -24,7 +24,7 @@ def main():
     @bot.command(name = "team", description = "Permettre d'afficher des boutons de choix d'équipe")
     async def team(ctx, team = None):
         if team == "bleu":
-            role = nextcord.utils.get(ctx.server.roles, name = "Equipe Bleue")
+            role = nextcord.utils.get(ctx.guild.roles, name = "Equipe Bleue")
             member = ctx.message.author
             await bot.add_roles(member, role)
             await ctx.send(f"{ctx.author.display_name} est maintenant dans l'équipe {team}e !")
