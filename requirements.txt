@@ -1,4 +1,4 @@
 nextcord
-dislash
+dislash==1.4.9
 dotenv-python
 python-dotenv
