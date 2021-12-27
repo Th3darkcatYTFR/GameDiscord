@@ -51,9 +51,9 @@ def main():
     @bot.command(name = "team", description = "Permettre d'afficher des boutons de choix d'équipe")
     async def team(ctx, team = None):
         if team == "bleu":
-            await ctx.send(f"{ctx.author.Display_name} est maintenant dans l'équpe bleue !")
+            await ctx.send(f"{ctx.author.display_name} est maintenant dans l'équipe {team}e !")
         elif team == "rouge":
-            await ctx.send(f"{ctx.author.Display_name} est maintenant dans l'équpe rouge !")
+            await ctx.send(f"{ctx.author.display_name} est maintenant dans l'équipe {team} !")        
         elif team == None:
             await ctx.send(f"Vous n'avez pas utilisée correctement la commande !")
 
