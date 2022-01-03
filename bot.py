@@ -1,23 +1,24 @@
-from discord import Client, Intents, Embed
-from discord_slash import SlashCommand, SlashContext
+import discord
+from discord.ext import commands
+import os
 import config
 from dotenv.main import load_dotenv
 
 
 def main():
 
-    bot = Client(intents=Intents.default())
-    slash = SlashCommand(bot)
     load_dotenv()
+
+    bot = commands.Bot(command_prefix="!")
 
     @bot.event
     async def on_ready():
-        print("Mon Bot est maintenant connecté !")
+        print('XIO is now online.'.
+            format(bot))
 
-    @slash.slash(name="test")
-    async def test(ctx: SlashContext):
-        embed = Embed(title="Embed Test")
-        await ctx.send(embed=embed)
+    @bot.command()
+    async def ping(ctx):
+        await ctx.channel.send("!pong")
 
     bot.run(config.TOKEN_BOT)
 
