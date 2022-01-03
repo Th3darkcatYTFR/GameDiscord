@@ -1,24 +1,22 @@
 import os
-import nextcord
+import discord
 #import asyncio
 import config
-from nextcord import Member
-from nextcord.colour import Color
+from discord import Member
+from discord.colour import Color
 from dotenv.main import load_dotenv
-from nextcord.ext import commands
-from nextcord.utils import get
-from nextcord.ext.commands import has_permissions , MissingPermissions
+from discord.ext import commands
+from discord.utils import get
+from discord.ext.commands import has_permissions , MissingPermissions
 
 def main():
 
 
 
-    activity = nextcord.Activity(type=nextcord.ActivityType.watching, name="le futur")
-    bot = commands.Bot(command_prefix=config.PREFIX, activity = activity, status=nextcord.Status.idle,help_command = None)
+    activity = discord.Activity(type=discord.ActivityType.watching, name="le futur")
+    bot = commands.Bot(command_prefix=config.PREFIX, activity = activity, status=discord.Status.idle,help_command = None)
 
     load_dotenv()
-
-    bot.load_extension("cog")
 
     @bot.event
     async def on_ready():
@@ -31,10 +29,10 @@ def main():
         await ctx.channel.purge(limit = 1)
         if bot.startGame == False:
             bot.startGame = True
-            em = nextcord.Embed(title = "Duel Game - Par Th3darkcatYT", description = "Que le jeu commence !")
+            em = discord.Embed(title = "Duel Game - Par Th3darkcatYT", description = "Que le jeu commence !")
             await ctx.send(embed = em)
         else:
-            em = nextcord.Embed(title = "Duel Game - Par Th3darkcatYT", description = "Le jeu est déjà en cours !")
+            em = discord.Embed(title = "Duel Game - Par Th3darkcatYT", description = "Le jeu est déjà en cours !")
             await ctx.send(embed = em)
 
     # Arret du jeu
@@ -43,10 +41,10 @@ def main():
         await ctx.channel.purge(limit = 1)
         if bot.startGame == True:
             bot.startGame = False
-            em = nextcord.Embed(title = "Duel Game - Par Th3darkcatYT", description = "Arret du jeu !")
+            em = discord.Embed(title = "Duel Game - Par Th3darkcatYT", description = "Arret du jeu !")
             await ctx.send(embed = em)
         else:
-            em = nextcord.Embed(title = "Duel Game - Par Th3darkcatYT", description = "Aucun jeu en cours !")
+            em = discord.Embed(title = "Duel Game - Par Th3darkcatYT", description = "Aucun jeu en cours !")
             await ctx.send(embed = em)
 
     #Identification du systeme de connexion
