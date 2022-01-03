@@ -15,11 +15,23 @@ def main():
 
 
     activity = discord.Activity(type=discord.ActivityType.watching, name="le futur")
-    bot = commands.Bot(command_prefix=config.PREFIX, activity = activity, status=discord.Status.idle,help_command = None)
+    bot = commands.Bot(
+        command_prefix=config.PREFIX,
+        activity = activity,
+        status=discord.Status.idle,
+        help_command = None)
+
     slash = SlashCommand(bot, sync_commands = True)
 
     load_dotenv()
 
+
+    @bot.event
+    async def on_ready():
+        print(f"{bot.user.name} est désormais connecté a discord avec succès !")
+        bot.startGame = False
+
+        
     @slash.slash(   
         name="flaazou",
         description="FLAAZOUUUU")
@@ -27,12 +39,6 @@ def main():
         embed = discord.Embed(title="FlaaTest",description = "Liste des commandes !", url = "https://cdn.discordapp.com/avatars/833726936890867784/35a4505aa389a112a73b3dbd4051f78e.png", color=0xFF7D42)
         embed.add_field(name = "Fun", value = "`funfact`")
         await ctx.send(embed=embed)
-
-
-    @bot.event
-    async def on_ready():
-        print(f"{bot.user.name} est désormais connecté a discord avec succès !")
-        bot.startGame = False
 
     # Démarrage du jeu
     @bot.command(name = "start", description = "Démarrer le jeu")
