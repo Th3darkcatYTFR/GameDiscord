@@ -2,4 +2,3 @@ discord
 dotenv-python
 python-dotenv
 discord_py_slash_command
-discord_slash
