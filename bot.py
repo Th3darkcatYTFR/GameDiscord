@@ -8,7 +8,7 @@ from dotenv.main import load_dotenv
 load_dotenv()
 
 bot = commands.Bot(command_prefix="/")
-slash = SlashCommand(bot)
+slash = SlashCommand(bot, sync_commands= True)
 @bot.event
 async def on_ready():
     print('XIO is now online.'.
