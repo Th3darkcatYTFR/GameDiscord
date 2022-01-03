@@ -5,24 +5,17 @@ from discord_slash import SlashCommand
 import config
 from dotenv.main import load_dotenv
 
+load_dotenv()
 
-def main():
+bot = commands.Bot(command_prefix="!")
+slash = SlashCommand(bot)
+@bot.event
+async def on_ready():
+    print('XIO is now online.'.
+        format(bot))
 
-    load_dotenv()
+@slash.slash(name="test")
+async def ping(ctx):
+    await ctx.channel.send("!pong")
 
-    bot = commands.Bot(command_prefix="!")
-    slash = SlashCommand(bot)
-    @bot.event
-    async def on_ready():
-        print('XIO is now online.'.
-            format(bot))
-
-    @slash.slash(name="test")
-    async def ping(ctx):
-        await ctx.channel.send("!pong")
-
-    bot.run(config.TOKEN_BOT)
-
-
-if __name__ == '__main__':
-    main()
+bot.run(config.TOKEN_BOT)
