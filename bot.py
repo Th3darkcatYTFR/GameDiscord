@@ -20,7 +20,9 @@ def main():
 
     load_dotenv()
 
-    @slash.slash(name="flaazou")
+    @slash.slash(   
+        name="flaazou",
+        description="FLAAZOUUUU")
     async def flaazou(ctx: SlashContext):
         embed = discord.Embed(title="FlaaTest",description = "Liste des commandes !", url = "https://cdn.discordapp.com/avatars/833726936890867784/35a4505aa389a112a73b3dbd4051f78e.png", color=0xFF7D42)
         embed.add_field(name = "Fun", value = "`funfact`")
