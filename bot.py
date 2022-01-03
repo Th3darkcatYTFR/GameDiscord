@@ -8,6 +8,7 @@ from dotenv.main import load_dotenv
 from discord.ext import commands
 from discord.utils import get
 from discord.ext.commands import has_permissions , MissingPermissions
+from discord_slash import SlashCommand, SlashContext
 
 def main():
 
@@ -15,8 +16,16 @@ def main():
 
     activity = discord.Activity(type=discord.ActivityType.watching, name="le futur")
     bot = commands.Bot(command_prefix=config.PREFIX, activity = activity, status=discord.Status.idle,help_command = None)
+    slash = SlashCommand(bot, sync_commands = True)
 
     load_dotenv()
+
+    @slash.slash(name="flaazou")
+    async def flaazou(ctx: SlashContext):
+        embed = discord.Embed(title="FlaaTest",description = "Liste des commandes !", url = "https://cdn.discordapp.com/avatars/833726936890867784/35a4505aa389a112a73b3dbd4051f78e.png", color=0xFF7D42)
+        embed.add_field(name = "Fun", value = "`funfact`")
+        await ctx.send(embed=embed)
+
 
     @bot.event
     async def on_ready():
