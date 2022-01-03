@@ -7,7 +7,7 @@ from dotenv.main import load_dotenv
 
 load_dotenv()
 
-bot = commands.Bot(command_prefix="!")
+bot = commands.Bot(command_prefix="/")
 slash = SlashCommand(bot)
 @bot.event
 async def on_ready():
